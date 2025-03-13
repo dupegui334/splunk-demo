@@ -1,4 +1,5 @@
 # Splunk demo
+In collaboration with David Lopez
 
 ## Random access and secure logs generator:
 Used for uploading dummy data into our Splunk accounts and making a nice demo for the students.
