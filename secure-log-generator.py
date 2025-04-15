@@ -32,8 +32,10 @@ events = ["Failed Login", "Successful Login", "Privilege Escalation", "File Acce
 severities = ["INFO", "WARNING", "CRITICAL"]
 
 def generate_secure_log_entry():
-    # Random timestamp for 2025
-    timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(random.randint(1672531200, 1735689600)))  # Unix timestamps for 2025
+    start_timestamp = int(time.mktime(time.strptime('2024-01-01 00:00:00', '%Y-%m-%d %H:%M:%S')))
+    end_timestamp = int(time.mktime(time.strptime('2025-03-18 23:59:59', '%Y-%m-%d %H:%M:%S')))
+    random_timestamp = random.randint(start_timestamp, end_timestamp)
+    timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(random_timestamp))
     
     # Randomly pick a user and IP from predefined lists (repeatable)
     user = random.choice(usernames)

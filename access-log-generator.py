@@ -17,7 +17,10 @@ ip_addresses = load_ip_addresses()
 
 def generate_log_entry():
     ip_address = random.choice(ip_addresses)
-    timestamp = time.strftime('%d/%b/%Y:%H:%M:%S +0000', time.gmtime(random.randint(1609459200, 1672444800)))
+    start_timestamp = int(time.mktime(time.strptime('2024-01-01 00:00:00', '%Y-%m-%d %H:%M:%S')))
+    end_timestamp = int(time.mktime(time.strptime('2025-03-18 23:59:59', '%Y-%m-%d %H:%M:%S')))
+    random_timestamp = random.randint(start_timestamp, end_timestamp)
+    timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(random_timestamp))
     method = random.choice(['GET', 'POST', 'PUT', 'DELETE'])
     endpoint = f"/api/v1/{random.choice(['users', 'products', 'orders'])}"
     status_code = random.choice([200, 201, 400, 401, 404, 500])
