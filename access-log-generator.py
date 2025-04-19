@@ -17,16 +17,17 @@ ip_addresses = load_ip_addresses()
 
 def generate_log_entry():
     ip_address = random.choice(ip_addresses)
-    start_timestamp = int(time.mktime(time.strptime('2024-01-01 00:00:00', '%Y-%m-%d %H:%M:%S')))
-    end_timestamp = int(time.mktime(time.strptime('2025-03-18 23:59:59', '%Y-%m-%d %H:%M:%S')))
+    start_timestamp = int(time.mktime(time.strptime('2025-01-01 00:00:00', '%Y-%m-%d %H:%M:%S')))
+    end_timestamp = int(time.mktime(time.strptime('2025-04-18 23:59:59', '%Y-%m-%d %H:%M:%S')))
     random_timestamp = random.randint(start_timestamp, end_timestamp)
     timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(random_timestamp))
     method = random.choice(['GET', 'POST', 'PUT', 'DELETE'])
     if method != 'DELETE':
         parameters = random.choice(['purchase', 'set_quantity', 'add_to_cart'])
-        endpoint = f"/api/v1/{random.choice(['users', 'products', 'orders'])}/?action={parameters}"
+        endpoint = f"/api/v1/{random.choice(['products', 'orders'])}/?action={parameters}&item={random.choice(['honda', 'bmw', 'ktm', 'aprilla', 'yamaha', 
+                                                                                                               'royal_enfield', 'cf', 'suzuki', 'kawasaki', 'ducati'])}"
     else:
-            endpoint = f"/api/v1/{random.choice(['users', 'products', 'orders'])}"
+        endpoint = f"/api/v1/{random.choice(['users', 'products', 'orders'])}"
     status_code = random.choice([200, 201, 400, 401, 404, 500])
     response_size = random.randint(100, 5000)
     user_agent = fake.user_agent()
