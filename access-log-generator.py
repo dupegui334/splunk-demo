@@ -22,7 +22,11 @@ def generate_log_entry():
     random_timestamp = random.randint(start_timestamp, end_timestamp)
     timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(random_timestamp))
     method = random.choice(['GET', 'POST', 'PUT', 'DELETE'])
-    endpoint = f"/api/v1/{random.choice(['users', 'products', 'orders'])}"
+    if method != 'DELETE':
+        parameters = random.choice(['purchase', 'set_quantity', 'add_to_cart'])
+        endpoint = f"/api/v1/{random.choice(['users', 'products', 'orders'])}/?action={parameters}"
+    else:
+            endpoint = f"/api/v1/{random.choice(['users', 'products', 'orders'])}"
     status_code = random.choice([200, 201, 400, 401, 404, 500])
     response_size = random.randint(100, 5000)
     user_agent = fake.user_agent()
@@ -41,5 +45,5 @@ def generate_log_file(file_name, num_entries=100):
             f.write(generate_log_entry())
 
 # Generate a log file with 2000 entries
-generate_log_file('host1/access.log', 2000)
-generate_log_file('host2/access.log', 2000)
+generate_log_file('host1/access.log', 9000)
+generate_log_file('host2/access.log', 9000)
